@@ -78,7 +78,7 @@ const SciFiBackground = () => {
                         style={{
                             backgroundImage: `url(${sectionImages[activeSection] || sectionImages['home']})`,
                             zIndex: 1,
-                            filter: 'brightness(0.4) contrast(1.2) saturate(0.7)'
+                            filter: 'brightness(0.7) contrast(1.1) saturate(0.9)'
                         }}
                     >
                         {/* Shutter effect overlay */}

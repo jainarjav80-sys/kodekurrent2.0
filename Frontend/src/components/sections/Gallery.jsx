@@ -32,30 +32,16 @@ export function Gallery() {
         </motion.div>
       </div>
 
-      {/* Row 2: Left to Right */}
+
+      {/* Row 3: Left to Right */}
       <div className="relative flex w-full overflow-hidden">
         <motion.div
           className="flex gap-6 min-w-max"
           initial={{ x: "-50%" }}
           animate={{ x: ["-50%", "0%"] }}
-          transition={{ duration: 45, ease: "linear", repeat: Infinity }}
-        >
-          {[...galleryImages, ...galleryImages].reverse().map((src, index) => (
-            <div key={`row2-${index}`} className="w-80 md:w-96 group relative overflow-hidden rounded-lg aspect-video border-2 border-primary/20 hover:border-primary transition-colors cursor-pointer flex-shrink-0 cursor-target">
-              <img src={src} alt={`Gallery 2-${index}`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-            </div>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* Row 3: Right to Left (Another) */}
-      <div className="relative flex w-full overflow-hidden">
-        <motion.div
-          className="flex gap-6 min-w-max"
-          animate={{ x: ["0%", "-50%"] }}
           transition={{ duration: 35, ease: "linear", repeat: Infinity }}
         >
-          {[...galleryImages, ...galleryImages].map((src, index) => (
+          {[...galleryImages, ...galleryImages].reverse().map((src, index) => (
             <div key={`row3-${index}`} className="w-80 md:w-96 group relative overflow-hidden rounded-lg aspect-video border-2 border-primary/20 hover:border-primary transition-colors cursor-pointer flex-shrink-0 cursor-target">
               <img src={src} alt={`Gallery 3-${index}`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
             </div>

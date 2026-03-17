@@ -40,9 +40,6 @@ export function Sponsors() {
                     className="max-w-full max-h-full object-contain transition-all duration-500 group-hover:scale-110"
                   />
                 </div>
-                <span className="font-pixel text-lg text-white/60 group-hover:text-primary transition-colors duration-300">
-                  {sponsor.name}
-                </span>
               </div>
             ))}
           </motion.div>

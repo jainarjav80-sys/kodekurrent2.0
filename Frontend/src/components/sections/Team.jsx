@@ -35,27 +35,47 @@ export function Team() {
         >
           {/* Double the cards for seamless loop */}
           {[...organizers, ...organizers].map((person, index) => (
-            <div
+            <motion.div
               key={`${person.name}-${index}`}
-              className="w-56 md:w-64 group relative border-2 border-primary/20 hover:border-primary/60 transition-all duration-300 overflow-hidden rounded-xl bg-black/60 shadow-lg shadow-primary/5"
+              className="w-56 md:w-64 group relative overflow-hidden rounded-xl bg-black/60 cursor-pointer"
+              whileHover="hover"
+              initial="initial"
             >
-              <div className="aspect-[4/5] overflow-hidden">
-                <img
-                  src={person.image}
-                  alt={person.name}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                />
-              </div>
+              <div className="relative overflow-hidden rounded-xl">
+                <div className="aspect-[4/5] overflow-hidden">
+                  <motion.img
+                    src={person.image}
+                    alt={person.name}
+                    className="w-full h-full object-cover grayscale-0 transition-all duration-700"
+                    variants={{
+                      hover: { scale: 1.1 }
+                    }}
+                  />
+                </div>
 
-              {/* Info Overlay */}
-              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p className="text-white font-pixel text-sm mb-1">{person.name}</p>
-                <p className="text-primary/80 font-mono text-xs uppercase tracking-wider">{person.role}</p>
-              </div>
+                {/* Refined Splash Info Overlay - Bottom Aligned & Non-Obscuring */}
+                <motion.div
+                  variants={{
+                    initial: { opacity: 0, y: 20 },
+                    hover: { opacity: 1, y: 0 }
+                  }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col items-center justify-end pb-8 pointer-events-none"
+                >
+                  <motion.p
+                    className="text-white font-pixel text-xl mb-1 text-center drop-shadow-[0_0_15px_rgba(168,85,247,1)]"
+                  >
+                    {person.name}
+                  </motion.p>
+                  <p className="text-secondary font-mono text-xs uppercase tracking-[0.3em] font-bold opacity-100">
+                    {person.role}
+                  </p>
+                </motion.div>
 
-              {/* Scanline pattern overlay (static) */}
-              <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_2px,3px_100%] opacity-20" />
-            </div>
+                {/* Scanline pattern overlay (static) */}
+                <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_2px,3px_100%] opacity-20" />
+              </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>
