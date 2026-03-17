@@ -15,15 +15,97 @@ export default function Home() {
     <Navbar />
 
     <main>
-      <Hero />
-      <About />
-      <Timeline />
-      <Sponsors />
-      <Prizes />
-      <Gallery />
-      <Team />
-      <FAQ />
-      <Contact />
+      <section id="home" className="section-blend">
+        <Hero />
+      </section>
+
+      <div id="about" className="section-blend">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <About />
+        </motion.div>
+      </div>
+
+      <div id="timeline" className="section-blend">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <Timeline />
+        </motion.div>
+      </div>
+
+      <div id="sponsors" className="section-blend">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <Sponsors />
+        </motion.div>
+      </div>
+
+      <div id="prizes" className="section-blend">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <Prizes />
+        </motion.div>
+      </div>
+
+      <div id="gallery" className="section-blend">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <Gallery />
+        </motion.div>
+      </div>
+
+      <div id="team" className="section-blend">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <Team />
+        </motion.div>
+      </div>
+
+      <div id="faq" className="section-blend">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <FAQ />
+        </motion.div>
+      </div>
+
+      <div id="contact" className="section-blend">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <Contact />
+        </motion.div>
+      </div>
     </main>
 
     <footer className="relative py-20 bg-black/90 border-t border-primary/20 overflow-hidden">

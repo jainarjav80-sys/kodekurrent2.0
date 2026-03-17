@@ -69,27 +69,9 @@ export function Hero() {
         duration: 0.8
       }} className="text-center">
 
-        <h1 className="text-2xl sm:text-3xl md:text-6xl lg:text-7xl font-pixel leading-tight mb-8 md:mb-12 flex flex-col items-center relative z-20">
-          <Shuffle
-            text="Kode"
-            tag="span"
-            className="text-white mb-4 font-pixel whitespace-nowrap inline-block"
-            shuffleDirection="right"
-            duration={0.5}
-            scrambleCharset="XYZ#@!&*"
-            stagger={0.05}
-            data-text="Kode"
-          />
-          <Shuffle
-            text="Kurrent 2.0"
-            tag="span"
-            className="text-primary glitch-text font-pixel whitespace-nowrap inline-block"
-            shuffleDirection="right"
-            duration={0.6}
-            scrambleCharset="01#@*&^%"
-            stagger={0.04}
-            data-text="Kurrent 2.0"
-          />
+        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-pixel leading-tight mb-8 md:mb-12 flex flex-col items-center relative z-20">
+          <span className="text-white mb-4">Kode</span>
+          <span className="text-primary">Kurrent 2.0</span>
         </h1>
 
         <p className="text-lg md:text-xl text-muted-foreground font-mono mb-10 max-w-lg mx-auto">

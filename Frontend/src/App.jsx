@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -8,7 +9,8 @@ import Home from "@/pages/home";
 import RegistrationSuccess from "@/pages/registration-success";
 import NotFound from "@/pages/not-found";
 import TargetCursor from "@/components/ui/TargetCursor";
-import GridScan from "@/components/ui/GridScan";
+import SciFiBackground from "@/components/ui/SciFiBackground";
+import SplashScreen from "@/components/ui/SplashScreen";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation } from "wouter";
 function Router() {
@@ -36,32 +38,31 @@ function Router() {
   </AnimatePresence>;
 }
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
+
   return <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <AnimatePresence mode="wait">
+        {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
+      </AnimatePresence>
 
-      {/* Global Animated Target Cursor */}
-      <TargetCursor targetSelector="a, button, input, select, textarea, img, svg, label, summary, .cursor-pointer, [role='button'], h1, h2, h3, h4, h5, h6, .interactive" />
+      {!showSplash && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          {/* Global Animated Target Cursor */}
+          <TargetCursor targetSelector="a, button, input, select, textarea, img, svg, label, summary, .cursor-pointer, [role='button'], h1, h2, h3, h4, h5, h6, .interactive" />
 
-      {/* Global Matrix Background */}
-      <div className="fixed inset-0 pointer-events-none -z-10">
-        <GridScan
-          sensitivity={0.55}
-          lineThickness={1}
-          linesColor="#000000"
-          gridScale={0.15}
-          scanColor="#FF9FFC"
-          scanOpacity={0.4}
-          enablePost
-          bloomIntensity={0.6}
-          chromaticAberration={0.002}
-          noiseIntensity={0.01}
-        />
-      </div>
+          {/* Global 'Alive' 3D Sci-Fi Background */}
+          <SciFiBackground />
 
-      <Router />
-      <Toaster />
-      <SonnerToaster position="top-center" theme="dark" />
-
+          <Router />
+          <Toaster />
+          <SonnerToaster position="top-center" theme="dark" />
+        </motion.div>
+      )}
     </TooltipProvider>
   </QueryClientProvider>;
 }
