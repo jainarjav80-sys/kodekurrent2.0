@@ -12,8 +12,8 @@ const RocketSplash = ({ onComplete }) => {
             return () => clearTimeout(timer);
         } else {
             setStatus('IGNITION');
-            setTimeout(() => setStatus('LAUNCHING'), 1000);
-            setTimeout(onComplete, 3000);
+            setTimeout(() => setStatus('LAUNCHING'), 800);
+            setTimeout(onComplete, 1800);
         }
     }, [countdown, onComplete]);
 
@@ -55,7 +55,7 @@ const RocketSplash = ({ onComplete }) => {
                             scale: 0.5, // Keep scale consistent
                             y: -2500,  // Vertical ascent
                             opacity: [1, 1, 0],
-                            transition: { duration: 2.5, ease: "easeIn" }
+                            transition: { duration: 2.0, ease: "easeIn" }
                         }}
                         transition={status !== 'LAUNCHING' ? {
                             duration: 0.05,
