@@ -10,7 +10,8 @@ import RegistrationSuccess from "@/pages/registration-success";
 import NotFound from "@/pages/not-found";
 import TargetCursor from "@/components/ui/TargetCursor";
 import SciFiBackground from "@/components/ui/SciFiBackground";
-import SplashScreen from "@/components/ui/SplashScreen";
+import RocketSplash from "@/components/ui/RocketSplash";
+import { ArcadeGame } from "@/components/ui/ArcadeGame";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation } from "wouter";
 function Router() {
@@ -43,7 +44,7 @@ function App() {
   return <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AnimatePresence mode="wait">
-        {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
+        {showSplash && <RocketSplash onComplete={() => setShowSplash(false)} />}
       </AnimatePresence>
 
       {!showSplash && (

@@ -37,12 +37,12 @@ export function Team() {
           {[...organizers, ...organizers].map((person, index) => (
             <motion.div
               key={`${person.name}-${index}`}
-              className="w-56 md:w-64 group relative overflow-hidden rounded-xl bg-black/60 cursor-pointer"
+              className="w-56 md:w-64 group relative overflow-hidden rounded-full bg-black/60 cursor-pointer"
               whileHover="hover"
               initial="initial"
             >
-              <div className="relative overflow-hidden rounded-xl">
-                <div className="aspect-[4/5] overflow-hidden">
+              <div className="relative overflow-hidden rounded-full">
+                <div className="aspect-square overflow-hidden">
                   <motion.img
                     src={person.image}
                     alt={person.name}
@@ -63,11 +63,11 @@ export function Team() {
                   className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col items-center justify-end pb-8 pointer-events-none"
                 >
                   <motion.p
-                    className="text-white font-pixel text-xl mb-1 text-center drop-shadow-[0_0_15px_rgba(168,85,247,1)]"
+                    className="text-white font-pixel text-sm md:text-base mb-1 text-center drop-shadow-[0_0_15px_rgba(168,85,247,1)]"
                   >
                     {person.name}
                   </motion.p>
-                  <p className="text-secondary font-mono text-xs uppercase tracking-[0.3em] font-bold opacity-100">
+                  <p className="text-secondary font-mono text-[10px] uppercase tracking-[0.3em] font-bold opacity-100">
                     {person.role}
                   </p>
                 </motion.div>

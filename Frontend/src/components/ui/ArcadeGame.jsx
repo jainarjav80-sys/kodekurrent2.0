@@ -279,11 +279,23 @@ export function ArcadeGame({ onClose }) {
                     </AnimatePresence>
                 </div>
 
-                {/* Footer Tip */}
-                <div className="bg-black/80 px-4 py-2 border-t border-white/10 text-center">
+                {/* Footer Tip & Skip Button */}
+                <div className="bg-black/80 px-4 py-3 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
                     <p className="font-mono text-[8px] sm:text-[10px] text-white/30 uppercase tracking-[0.3em]">
                         Prevent the ball from escaping the sandbox
                     </p>
+                    <button
+                        onClick={onClose}
+                        className="font-pixel text-[10px] sm:text-xs text-secondary hover:text-white transition-colors flex items-center gap-2 group cursor-pointer"
+                    >
+                        <span>SKIP TO WEBSITE</span>
+                        <motion.span
+                            animate={{ x: [0, 5, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                            {">>>"}
+                        </motion.span>
+                    </button>
                 </div>
             </div>
         </motion.div>

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'framer-motion';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
+import { motion, AnimatePresence, useScroll, useSpring, useTransform, useMotionValue } from 'framer-motion';
 import './SciFiBackground.css';
 
 const sectionImages = {
@@ -15,8 +15,20 @@ const sectionImages = {
 };
 
 const SciFiBackground = () => {
-    const containerRef = useRef(null);
     const [activeSection, setActiveSection] = useState('home');
+
+    // Use MotionValues for smooth interaction
+    const mouseX = useMotionValue(0.5);
+    const mouseY = useMotionValue(0.5);
+
+    // Add spring physics for high-performance smoothing
+    const springConfig = { damping: 30, stiffness: 200, restDelta: 0.001 };
+    const smoothMouseX = useSpring(mouseX, springConfig);
+    const smoothMouseY = useSpring(mouseY, springConfig);
+
+    // Map smooth mouse values to rotations
+    const rotateX = useTransform(smoothMouseY, [0, 1], [2, -2]);
+    const rotateY = useTransform(smoothMouseX, [0, 1], [-2, 2]);
 
     useEffect(() => {
         const observerOptions = {
@@ -44,55 +56,60 @@ const SciFiBackground = () => {
 
     useEffect(() => {
         const handleMouseMove = (e) => {
-            if (!containerRef.current) return;
             const { clientX, clientY } = e;
             const { innerWidth, innerHeight } = window;
 
-            const xRot = (clientY / innerHeight - 0.5) * 4;
-            const yRot = (clientX / innerWidth - 0.5) * -4;
-
-            containerRef.current.style.transform = `perspective(1000px) rotateX(${xRot}deg) rotateY(${yRot}deg) scale(1.05)`;
+            // Set normalized coordinates (0 to 1)
+            mouseX.set(clientX / innerWidth);
+            mouseY.set(clientY / innerHeight);
         };
 
-        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
         return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, []);
+    }, [mouseX, mouseY]);
 
     return (
         <div className="scifi-bg-viewport">
             {/* Global Scanline Effect */}
             <div className="scifi-scanline" />
 
-            <div className="scifi-bg-container" ref={containerRef}>
-                <AnimatePresence mode="popLayout">
+            <motion.div
+                className="scifi-bg-container"
+                style={{
+                    rotateX,
+                    rotateY,
+                    perspective: 1000
+                }}
+            >
+                <AnimatePresence mode="popLayout" initial={false}>
                     <motion.div
                         key={activeSection}
-                        initial={{ clipPath: 'inset(100% 0% 0% 0%)', opacity: 0, scale: 1.1 }}
-                        animate={{ clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, scale: 1 }}
-                        exit={{ clipPath: 'inset(0% 0% 100% 0%)', opacity: 0, scale: 1.1 }}
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 1.05 }}
                         transition={{
-                            duration: 1.2,
-                            ease: [0.22, 1, 0.36, 1]
+                            duration: 0.8,
+                            ease: "easeInOut"
                         }}
                         className="scifi-bg-layer"
                         style={{
                             backgroundImage: `url(${sectionImages[activeSection] || sectionImages['home']})`,
                             zIndex: 1,
-                            filter: 'brightness(0.7) contrast(1.1) saturate(0.9)'
+                            filter: 'brightness(0.6) contrast(1.1) saturate(0.8)'
                         }}
                     >
-                        {/* Shutter effect overlay */}
+                        {/* Shutter effect replacement: subtle flicker on transition */}
                         <motion.div
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: [0, 0.15, 0] }}
-                            transition={{ duration: 0.6 }}
-                            className="absolute inset-0 bg-white/5 pointer-events-none z-10"
+                            animate={{ opacity: [0, 0.2, 0] }}
+                            transition={{ duration: 0.4 }}
+                            className="absolute inset-0 bg-white/10 pointer-events-none z-10"
                         />
                     </motion.div>
                 </AnimatePresence>
                 <div className="scifi-bg-overlay-glow" />
                 <div className="scifi-bg-particles" />
-            </div>
+            </motion.div>
         </div>
     );
 };
